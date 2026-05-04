@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+laravel-appointment/vendor/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+!laravel-appointment/.env.example
+laravel-appointment/.phpunit.result.cache
+
+# Laravel
+laravel-appointment/storage/*.key
+laravel-appointment/bootstrap/cache/*
+!laravel-appointment/bootstrap/cache/.gitignore
+laravel-appointment/storage/app/*
+!laravel-appointment/storage/app/.gitignore
+laravel-appointment/storage/framework/*
+!laravel-appointment/storage/framework/.gitignore
+laravel-appointment/storage/logs/*
+!laravel-appointment/storage/logs/.gitignore
+
+# OS / IDE
+Thumbs.db
+.DS_Store
+.idea/
+.vscode/

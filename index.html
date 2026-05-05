@@ -2744,8 +2744,7 @@
         const portfolioTrack = document.getElementById('portfolioTrack');
         const portfolioPrev = document.getElementById('portfolioPrev');
         const portfolioNext = document.getElementById('portfolioNext');
-        let portfolioAutoTimer = null;
-        const portfolioAutoMs = 4200;
+
 
         const updateCarouselButtons = () => {
             if (!portfolioTrack || !portfolioPrev || !portfolioNext) return;
@@ -2797,34 +2796,7 @@
         portfolioTrack?.addEventListener('scroll', updateCarouselButtons);
         window.addEventListener('resize', updateCarouselButtons);
 
-        const autoAdvancePortfolio = () => {
-            if (!portfolioTrack) return;
-            moveCarouselBy(1);
-        };
 
-        const startPortfolioAuto = () => {
-            if (!portfolioTrack || portfolioAutoTimer) return;
-            portfolioAutoTimer = setInterval(autoAdvancePortfolio, portfolioAutoMs);
-        };
-
-        const stopPortfolioAuto = () => {
-            if (!portfolioAutoTimer) return;
-            clearInterval(portfolioAutoTimer);
-            portfolioAutoTimer = null;
-        };
-
-        portfolioTrack?.addEventListener('mouseenter', stopPortfolioAuto);
-        portfolioTrack?.addEventListener('mouseleave', startPortfolioAuto);
-        portfolioTrack?.addEventListener('touchstart', stopPortfolioAuto, { passive: true });
-        portfolioTrack?.addEventListener('touchend', startPortfolioAuto, { passive: true });
-        portfolioPrev?.addEventListener('click', stopPortfolioAuto);
-        portfolioNext?.addEventListener('click', stopPortfolioAuto);
-        portfolioPrev?.addEventListener('click', startPortfolioAuto);
-        portfolioNext?.addEventListener('click', startPortfolioAuto);
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) stopPortfolioAuto();
-            else startPortfolioAuto();
-        });
 
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {

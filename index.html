@@ -1017,12 +1017,33 @@
             color: white;
         }
 
+        .portfolio-carousel {
+            position: relative;
+        }
+
         .portfolio-grid.portfolio-gallery {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-auto-rows: 56px;
+            grid-auto-flow: column;
+            grid-auto-columns: minmax(280px, 34vw);
+            grid-auto-rows: 1fr;
             gap: 14px;
-            grid-auto-flow: dense;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 4px 6px 14px;
+            scroll-snap-type: x proximity;
+            scroll-padding: 6px;
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--pink-primary) transparent;
+        }
+
+        .portfolio-grid.portfolio-gallery::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .portfolio-grid.portfolio-gallery::-webkit-scrollbar-thumb {
+            background: var(--pink-primary);
+            border-radius: 999px;
         }
 
         button.portfolio-item {
@@ -1043,7 +1064,8 @@
             cursor: zoom-in;
             border: 1px solid var(--dark-border);
             box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
-            min-height: 0;
+            min-height: 380px;
+            scroll-snap-align: start;
         }
 
         .portfolio-gallery .portfolio-item:focus-visible {
@@ -1051,20 +1073,55 @@
             outline-offset: 3px;
         }
 
-        /* Portrait vs landscape footprint in the grid */
+        /* Portrait vs landscape footprint in the carousel */
         .portfolio-gallery .gallery-tile--portrait {
-            grid-column: span 3;
-            grid-row: span 4;
+            grid-column: span 1;
+            min-height: 460px;
         }
 
         .portfolio-gallery .gallery-tile--landscape {
-            grid-column: span 6;
-            grid-row: span 3;
+            grid-column: span 1;
+            min-height: 360px;
         }
 
         .portfolio-gallery .gallery-tile--video {
-            grid-column: span 6;
-            grid-row: span 3;
+            grid-column: span 1;
+            min-height: 360px;
+        }
+
+        .portfolio-carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            border: 1px solid var(--dark-border);
+            background: rgba(10, 10, 15, 0.78);
+            color: var(--text-primary);
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            z-index: 3;
+            transition: all var(--transition-fast);
+        }
+
+        .portfolio-carousel-btn:hover {
+            background: var(--pink-primary);
+            border-color: var(--pink-primary);
+        }
+
+        .portfolio-carousel-btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        .portfolio-carousel-btn.prev {
+            left: -10px;
+        }
+
+        .portfolio-carousel-btn.next {
+            right: -10px;
         }
 
         .portfolio-item .gallery-thumb {
@@ -1712,19 +1769,12 @@
             }
 
             .portfolio-grid.portfolio-gallery {
-                grid-template-columns: repeat(6, 1fr);
-                grid-auto-rows: 52px;
+                grid-auto-columns: minmax(280px, 52vw);
             }
 
-            .portfolio-gallery .gallery-tile--portrait {
-                grid-column: span 3;
-                grid-row: span 4;
-            }
-
-            .portfolio-gallery .gallery-tile--landscape,
-            .portfolio-gallery .gallery-tile--video {
-                grid-column: span 6;
-                grid-row: span 3;
+            .portfolio-carousel-btn {
+                width: 38px;
+                height: 38px;
             }
 
             .contact-grid {
@@ -1823,20 +1873,19 @@
             }
 
             .portfolio-grid.portfolio-gallery {
-                grid-template-columns: repeat(2, 1fr);
-                grid-auto-rows: 140px;
+                grid-auto-columns: minmax(240px, 80vw);
                 gap: 10px;
             }
 
-            .portfolio-gallery .gallery-tile--portrait {
-                grid-column: span 1;
-                grid-row: span 2;
-            }
-
+            .portfolio-gallery .portfolio-item,
+            .portfolio-gallery .gallery-tile--portrait,
             .portfolio-gallery .gallery-tile--landscape,
             .portfolio-gallery .gallery-tile--video {
-                grid-column: 1 / -1;
-                grid-row: span 2;
+                min-height: 300px;
+            }
+
+            .portfolio-carousel-btn {
+                display: none;
             }
 
             .form-row {
@@ -2376,29 +2425,67 @@
                     <button type="button" class="filter-btn" data-filter="commercial">Video commercial</button>
                 </div>
             </div>
-            <div class="portfolio-grid portfolio-gallery">
-                <button type="button" class="portfolio-item reveal gallery-tile--portrait" data-category="digital" data-gallery-type="image" data-gallery-src="assets/photo-1.png" aria-label="View image">
-                    <img class="gallery-thumb" src="assets/photo-1.png" alt="" loading="lazy" width="900" height="1200">
+            <div class="portfolio-carousel">
+                <button type="button" class="portfolio-carousel-btn prev" id="portfolioPrev" aria-label="Previous portfolio items">‹</button>
+                <button type="button" class="portfolio-carousel-btn next" id="portfolioNext" aria-label="Next portfolio items">›</button>
+            <div class="portfolio-grid portfolio-gallery" id="portfolioTrack">
+                <button type="button" class="portfolio-item reveal gallery-tile--portrait" data-category="digital" data-gallery-type="image" data-gallery-src="assets/digital-graphics/photo-1.png" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/digital-graphics/photo-1.png" alt="" loading="lazy" width="900" height="1200">
                 </button>
-                <button type="button" class="portfolio-item reveal gallery-tile--landscape" data-category="digital" data-gallery-type="image" data-gallery-src="assets/photo-2.png" aria-label="View image">
-                    <img class="gallery-thumb" src="assets/photo-2.png" alt="" loading="lazy" width="1200" height="800">
+                <button type="button" class="portfolio-item reveal gallery-tile--landscape" data-category="digital" data-gallery-type="image" data-gallery-src="assets/digital-graphics/photo-2.png" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/digital-graphics/photo-2.png" alt="" loading="lazy" width="1200" height="800">
                 </button>
-                <button type="button" class="portfolio-item reveal gallery-tile--portrait" data-category="podcast" data-gallery-type="image" data-gallery-src="assets/photo-3.png" aria-label="View image">
-                    <img class="gallery-thumb" src="assets/photo-3.png" alt="" loading="lazy" width="900" height="1200">
+                <button type="button" class="portfolio-item reveal gallery-tile--video" data-category="podcast" data-gallery-type="youtube" data-gallery-src="https://www.youtube.com/embed/5MonTeYRGLw?autoplay=1&controls=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3" aria-label="Play video">
+                    <span class="gallery-play-icon" aria-hidden="true"></span>
+                    <img class="gallery-thumb" src="https://i.ytimg.com/vi/5MonTeYRGLw/hqdefault.jpg" alt="" loading="lazy" width="1200" height="800">
                 </button>
-                <button type="button" class="portfolio-item reveal gallery-tile--landscape" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/photo-1.png" aria-label="View image">
-                    <img class="gallery-thumb" src="assets/photo-1.png" alt="" loading="lazy" width="1200" height="800">
+                <button type="button" class="portfolio-item reveal gallery-tile--landscape" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/campaign-shoot/photo-1.png" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/campaign-shoot/photo-1.png" alt="" loading="lazy" width="1200" height="800">
                 </button>
-                <button type="button" class="portfolio-item reveal gallery-tile--portrait" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/photo-2.png" aria-label="View image">
-                    <img class="gallery-thumb" src="assets/photo-2.png" alt="" loading="lazy" width="900" height="1200">
+                <button type="button" class="portfolio-item reveal gallery-tile--portrait" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/campaign-shoot/photo-2.png" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/campaign-shoot/photo-2.png" alt="" loading="lazy" width="900" height="1200">
                 </button>
-                <button type="button" class="portfolio-item reveal gallery-tile--landscape" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/photo-3.png" aria-label="View image">
-                    <img class="gallery-thumb" src="assets/photo-3.png" alt="" loading="lazy" width="1200" height="800">
+                <button type="button" class="portfolio-item reveal gallery-tile--landscape" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/campaign-shoot/photo-3.png" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/campaign-shoot/photo-3.png" alt="" loading="lazy" width="1200" height="800">
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--portrait" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/campaign-shoot/_AVR2284.JPG" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/campaign-shoot/_AVR2284.JPG" alt="" loading="lazy" width="900" height="1200">
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--landscape" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/campaign-shoot/_AVR2309.JPG" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/campaign-shoot/_AVR2309.JPG" alt="" loading="lazy" width="1200" height="800">
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--portrait" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/campaign-shoot/_AVR2432.JPG" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/campaign-shoot/_AVR2432.JPG" alt="" loading="lazy" width="900" height="1200">
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--landscape" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/campaign-shoot/_AVR2658.JPG" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/campaign-shoot/_AVR2658.JPG" alt="" loading="lazy" width="1200" height="800">
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--portrait" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/campaign-shoot/_AVR3667.JPG" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/campaign-shoot/_AVR3667.JPG" alt="" loading="lazy" width="900" height="1200">
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--landscape" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/campaign-shoot/_AVR3677.JPG" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/campaign-shoot/_AVR3677.JPG" alt="" loading="lazy" width="1200" height="800">
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--portrait" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/campaign-shoot/_AVR3696.JPG" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/campaign-shoot/_AVR3696.JPG" alt="" loading="lazy" width="900" height="1200">
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--landscape" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/campaign-shoot/_AVR3750.JPG" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/campaign-shoot/_AVR3750.JPG" alt="" loading="lazy" width="1200" height="800">
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--portrait" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/campaign-shoot/_AVR3750%20(1).JPG" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/campaign-shoot/_AVR3750%20(1).JPG" alt="" loading="lazy" width="900" height="1200">
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--landscape" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/campaign-shoot/_AVR7704.JPG" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/campaign-shoot/_AVR7704.JPG" alt="" loading="lazy" width="1200" height="800">
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--portrait" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/campaign-shoot/_AVR7924.JPG" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/campaign-shoot/_AVR7924.JPG" alt="" loading="lazy" width="900" height="1200">
                 </button>
                 <button type="button" class="portfolio-item reveal gallery-tile--video" data-category="commercial" data-gallery-type="youtube" data-gallery-src="https://www.youtube.com/embed/BdSrdnyNCcU?autoplay=1&controls=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3" aria-label="Play video">
                     <span class="gallery-play-icon" aria-hidden="true"></span>
                     <img class="gallery-thumb" src="https://i.ytimg.com/vi/BdSrdnyNCcU/hqdefault.jpg" alt="" loading="lazy" width="1200" height="800">
                 </button>
+            </div>
             </div>
         </div>
     </section>
@@ -2654,6 +2741,90 @@
         // ============================================
         const filterBtns = document.querySelectorAll('.filter-btn');
         const portfolioItems = document.querySelectorAll('.portfolio-item');
+        const portfolioTrack = document.getElementById('portfolioTrack');
+        const portfolioPrev = document.getElementById('portfolioPrev');
+        const portfolioNext = document.getElementById('portfolioNext');
+        let portfolioAutoTimer = null;
+        const portfolioAutoMs = 4200;
+
+        const updateCarouselButtons = () => {
+            if (!portfolioTrack || !portfolioPrev || !portfolioNext) return;
+            const maxScroll = Math.max(0, portfolioTrack.scrollWidth - portfolioTrack.clientWidth - 2);
+            portfolioPrev.disabled = portfolioTrack.scrollLeft <= 2;
+            portfolioNext.disabled = portfolioTrack.scrollLeft >= maxScroll;
+        };
+
+        const getVisibleCarouselItems = () => {
+            if (!portfolioTrack) return [];
+            return Array.from(portfolioTrack.querySelectorAll('.portfolio-item')).filter((item) => item.style.display !== 'none');
+        };
+
+        const getCurrentCarouselIndex = (items) => {
+            if (!portfolioTrack || items.length === 0) return 0;
+            const trackLeft = portfolioTrack.getBoundingClientRect().left;
+            let closestIndex = 0;
+            let closestDistance = Number.POSITIVE_INFINITY;
+            items.forEach((item, index) => {
+                const distance = Math.abs(item.getBoundingClientRect().left - trackLeft);
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestIndex = index;
+                }
+            });
+            return closestIndex;
+        };
+
+        const moveCarouselBy = (direction) => {
+            if (!portfolioTrack) return;
+            const visibleItems = getVisibleCarouselItems();
+            if (visibleItems.length < 2) return;
+
+            const currentIndex = getCurrentCarouselIndex(visibleItems);
+            let nextIndex = currentIndex + direction;
+            if (nextIndex >= visibleItems.length) nextIndex = 0;
+            if (nextIndex < 0) nextIndex = visibleItems.length - 1;
+            visibleItems[nextIndex].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+        };
+
+        portfolioPrev?.addEventListener('click', () => {
+            moveCarouselBy(-1);
+        });
+
+        portfolioNext?.addEventListener('click', () => {
+            moveCarouselBy(1);
+        });
+
+        portfolioTrack?.addEventListener('scroll', updateCarouselButtons);
+        window.addEventListener('resize', updateCarouselButtons);
+
+        const autoAdvancePortfolio = () => {
+            if (!portfolioTrack) return;
+            moveCarouselBy(1);
+        };
+
+        const startPortfolioAuto = () => {
+            if (!portfolioTrack || portfolioAutoTimer) return;
+            portfolioAutoTimer = setInterval(autoAdvancePortfolio, portfolioAutoMs);
+        };
+
+        const stopPortfolioAuto = () => {
+            if (!portfolioAutoTimer) return;
+            clearInterval(portfolioAutoTimer);
+            portfolioAutoTimer = null;
+        };
+
+        portfolioTrack?.addEventListener('mouseenter', stopPortfolioAuto);
+        portfolioTrack?.addEventListener('mouseleave', startPortfolioAuto);
+        portfolioTrack?.addEventListener('touchstart', stopPortfolioAuto, { passive: true });
+        portfolioTrack?.addEventListener('touchend', startPortfolioAuto, { passive: true });
+        portfolioPrev?.addEventListener('click', stopPortfolioAuto);
+        portfolioNext?.addEventListener('click', stopPortfolioAuto);
+        portfolioPrev?.addEventListener('click', startPortfolioAuto);
+        portfolioNext?.addEventListener('click', startPortfolioAuto);
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) stopPortfolioAuto();
+            else startPortfolioAuto();
+        });
 
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -2678,8 +2849,14 @@
                         }, 300);
                     }
                 });
+                portfolioTrack?.scrollTo({ left: 0, behavior: 'smooth' });
+                setTimeout(updateCarouselButtons, 330);
+                stopPortfolioAuto();
+                startPortfolioAuto();
             });
         });
+        updateCarouselButtons();
+        startPortfolioAuto();
 
         // ============================================
         // PORTFOLIO LIGHTBOX (images & video)

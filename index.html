@@ -563,6 +563,41 @@
             margin-bottom: 32px;
         }
 
+        .about-blocks {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-bottom: 36px;
+        }
+
+        .about-block {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .about-block h3 {
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+            color: var(--pink-primary);
+            letter-spacing: 0.2px;
+        }
+
+        .about-block p {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+        }
+
+        .about-values-list {
+            margin: 12px 0 0;
+            padding-left: 18px;
+            display: grid;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
         .about-features {
             display: flex;
             flex-direction: column;
@@ -1163,7 +1198,8 @@
         }
 
         .gallery-lightbox-inner img,
-        .gallery-lightbox-inner video {
+        .gallery-lightbox-inner video,
+        .gallery-lightbox-inner iframe {
             max-width: 100%;
             max-height: min(92vh, 900px);
             width: auto;
@@ -1174,8 +1210,16 @@
         }
 
         .gallery-lightbox-inner .gallery-lightbox-img.is-off,
-        .gallery-lightbox-inner .gallery-lightbox-video.is-off {
+        .gallery-lightbox-inner .gallery-lightbox-video.is-off,
+        .gallery-lightbox-inner .gallery-lightbox-frame.is-off {
             display: none;
+        }
+
+        .gallery-lightbox-inner .gallery-lightbox-frame {
+            width: min(96vw, 1200px);
+            aspect-ratio: 16/9;
+            border: none;
+            background: #000;
         }
 
         .gallery-lightbox-close {
@@ -1963,55 +2007,51 @@
                 <div class="about-image reveal">
                     <div class="about-image-main"></div>
                     <div class="about-floating-card">
-                        <h4>Client Satisfaction</h4>
-                        <p>98% Happy Clients</p>
+                        <h4>Core Focus</h4>
+                        <p>Excellence &amp; Impact</p>
                     </div>
                 </div>
                 <div class="about-content reveal">
                     <span class="section-label">About Us</span>
-                    <h2 class="section-title">Crafting Visual Excellence Since 2022</h2>
+                    <h2 class="section-title">Building Creative Impact Since 2024</h2>
                     <p class="section-subtitle">
-                        We will produce a segment where in, it’s all about your branding or personal branding. This video will be shared online and via social media channels,we will create reels to futher extend your brand’s reach                     </p>
-                    <div class="about-features">
-                        <div class="about-feature">
-                            <div class="feature-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <path d="M12 6v6l4 2"/>
-                                </svg>
-                            </div>
-                            <div class="feature-text">
-                                <h4>Timely Delivery</h4>
-                                <p>We respect deadlines and deliver exceptional work on schedule.</p>
-                            </div>
-                        </div>
-                        <div class="about-feature">
-                            <div class="feature-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                                    <path d="M2 17l10 5 10-5"/>
-                                    <path d="M2 12l10 5 10-5"/>
-                                </svg>
-                            </div>
-                            <div class="feature-text">
-                                <h4>Premium Quality</h4>
-                                <p>Every project receives our full creative attention and expertise.</p>
-                            </div>
-                        </div>
-                        <div class="about-feature">
-                            <div class="feature-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                    <circle cx="9" cy="7" r="4"/>
-                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                                </svg>
-                            </div>
-                            <div class="feature-text">
-                                <h4>Collaborative Approach</h4>
-                                <p>We work closely with clients to bring their vision to life.</p>
-                            </div>
-                        </div>
+                        As a full-service media and branding production company, we combine strategic storytelling, innovative content, and creative excellence to help clients elevate their presence locally and internationally.
+                    </p>
+                    <div class="about-blocks">
+                        <article class="about-block">
+                            <h3>Vision</h3>
+                            <p>To be a leading full-service media and branding production powerhouse that empowers businesses, leaders, and brands to elevate their presence through impactful storytelling, innovative content, and creative excellence locally and internationally.</p>
+                        </article>
+                        <article class="about-block">
+                            <h3>Mission</h3>
+                            <p>To deliver high-quality multimedia production, strategic brand marketing, podcast production, social media management, professional creative talents, and comprehensive event coverage that ensure client satisfaction while enhancing visibility, credibility, and sustainable growth across local and global markets.</p>
+                            <ul class="about-values-list">
+                                <li>Excellence</li>
+                                <li>Client satisfaction</li>
+                                <li>On-time delivery</li>
+                                <li>Alignment with clients, team, and partners</li>
+                                <li>Growth and innovation</li>
+                            </ul>
+                        </article>
+                        <article class="about-block">
+                            <h3>Core Values</h3>
+                            <ul class="about-values-list">
+                                <li><strong>Excellence:</strong> We deliver detail-driven multimedia production and branding solutions with professionalism, creativity, and precision in every project.</li>
+                                <li><strong>Client-Centered Alignment:</strong> We align with client vision, goals, and brand identity to create customized solutions with measurable outcomes.</li>
+                                <li><strong>Integrity, Reliability and On-Time Delivery:</strong> We uphold honesty, transparency, accountability, and dependable service as promised.</li>
+                                <li><strong>Collaboration and Partnership:</strong> We foster strong teamwork with internal teams, creative talents, and strategic partners.</li>
+                                <li><strong>Growth, Innovation and Adaptability:</strong> We continuously evolve our skills, technology, and strategies to serve diverse industries effectively.</li>
+                            </ul>
+                        </article>
+                        <article class="about-block">
+                            <h3>Corporate Culture Statement</h3>
+                            <p>At EviMedia Productions, we cultivate a culture of excellence, integrity, and collaboration where creativity meets strategy and vision turns into impact. We are deeply committed to aligning with our clients’ goals, working in unity with our team and partners, and delivering high-quality outputs on time and beyond expectations. We value innovation, professionalism, and continuous growth, ensuring that every project elevates brands, builds credibility, and creates lasting influence locally and internationally.</p>
+                        </article>
+                        <article class="about-block">
+                            <h3>Company Background</h3>
+                            <p>Founded in 2024, EviMedia Productions has continuously honed its expertise in producing and managing high-quality podcast events. Our experience helps us understand both the creative and technical demands of production, ensuring impactful and professional results.</p>
+                            <p>We are committed to serving our brand collaborators and clients through innovation, strategic storytelling, and seamless execution from concept development to final production. With a passion for creativity and dedication to quality, we build lasting partnerships and deliver outcomes that exceed expectations.</p>
+                        </article>
                     </div>
                     <a href="#contact" class="btn btn-primary">Work With Us</a>
                 </div>
@@ -2355,26 +2395,9 @@
                 <button type="button" class="portfolio-item reveal gallery-tile--landscape" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/photo-3.png" aria-label="View image">
                     <img class="gallery-thumb" src="assets/photo-3.png" alt="" loading="lazy" width="1200" height="800">
                 </button>
-                <button type="button" class="portfolio-item reveal gallery-tile--video" data-category="commercial" data-gallery-type="video" data-gallery-src="assets/videos/2-CONFESSION-DRAFT2.mp4" data-gallery-thumb="assets/photo-3.png" aria-label="Play video">
+                <button type="button" class="portfolio-item reveal gallery-tile--video" data-category="commercial" data-gallery-type="youtube" data-gallery-src="https://www.youtube.com/embed/BdSrdnyNCcU?autoplay=1&controls=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3" aria-label="Play video">
                     <span class="gallery-play-icon" aria-hidden="true"></span>
-                    <img class="gallery-video-thumb" src="assets/photo-3.png" alt="" loading="lazy">
-                    <video class="gallery-preview-video" muted playsinline loop preload="none">
-                        <source data-src="assets/videos/2-CONFESSION-DRAFT2.mp4" type="video/mp4">
-                    </video>
-                </button>
-                <button type="button" class="portfolio-item reveal gallery-tile--video" data-category="commercial" data-gallery-type="video" data-gallery-src="assets/videos/6-CONFESSION-DRAFT2.mp4" data-gallery-thumb="assets/photo-1.png" aria-label="Play video">
-                    <span class="gallery-play-icon" aria-hidden="true"></span>
-                    <img class="gallery-video-thumb" src="assets/photo-1.png" alt="" loading="lazy">
-                    <video class="gallery-preview-video" muted playsinline loop preload="none">
-                        <source data-src="assets/videos/6-CONFESSION-DRAFT2.mp4" type="video/mp4">
-                    </video>
-                </button>
-                <button type="button" class="portfolio-item reveal gallery-tile--video" data-category="commercial" data-gallery-type="video" data-gallery-src="assets/videos/6-EMPLOYEE-DRAFT2.mp4" data-gallery-thumb="assets/photo-2.png" aria-label="Play video">
-                    <span class="gallery-play-icon" aria-hidden="true"></span>
-                    <img class="gallery-video-thumb" src="assets/photo-2.png" alt="" loading="lazy">
-                    <video class="gallery-preview-video" muted playsinline loop preload="none">
-                        <source data-src="assets/videos/6-EMPLOYEE-DRAFT2.mp4" type="video/mp4">
-                    </video>
+                    <img class="gallery-thumb" src="https://i.ytimg.com/vi/BdSrdnyNCcU/hqdefault.jpg" alt="" loading="lazy" width="1200" height="800">
                 </button>
             </div>
         </div>
@@ -2386,6 +2409,7 @@
         <div class="gallery-lightbox-inner">
             <img id="galleryLightboxImg" class="gallery-lightbox-img is-off" src="" alt="">
             <video id="galleryLightboxVideo" class="gallery-lightbox-video is-off" controls playsinline></video>
+            <iframe id="galleryLightboxFrame" class="gallery-lightbox-frame is-off" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
     </div>
 
@@ -2665,6 +2689,7 @@
         const galleryLightboxClose = galleryLightbox?.querySelector('.gallery-lightbox-close');
         const galleryLightboxImg = document.getElementById('galleryLightboxImg');
         const galleryLightboxVideo = document.getElementById('galleryLightboxVideo');
+        const galleryLightboxFrame = document.getElementById('galleryLightboxFrame');
 
         const hydratePreviewVideo = (btn) => {
             if (!btn) return;
@@ -2701,8 +2726,10 @@
             galleryLightboxVideo.removeAttribute('poster');
             galleryLightboxVideo.load();
             galleryLightboxImg.removeAttribute('src');
+            galleryLightboxFrame.removeAttribute('src');
             galleryLightboxImg.classList.add('is-off');
             galleryLightboxVideo.classList.add('is-off');
+            galleryLightboxFrame.classList.add('is-off');
             document.body.style.overflow = '';
         };
 
@@ -2712,16 +2739,27 @@
             document.body.style.overflow = 'hidden';
             if (type === 'video') {
                 galleryLightboxImg.classList.add('is-off');
+                galleryLightboxFrame.classList.add('is-off');
                 galleryLightboxVideo.classList.remove('is-off');
                 if (poster) galleryLightboxVideo.setAttribute('poster', poster);
                 else galleryLightboxVideo.removeAttribute('poster');
                 galleryLightboxVideo.src = src;
                 galleryLightboxVideo.play().catch(() => {});
+            } else if (type === 'youtube') {
+                galleryLightboxImg.classList.add('is-off');
+                galleryLightboxVideo.classList.add('is-off');
+                galleryLightboxVideo.pause();
+                galleryLightboxVideo.removeAttribute('src');
+                galleryLightboxVideo.load();
+                galleryLightboxFrame.classList.remove('is-off');
+                galleryLightboxFrame.src = src;
             } else {
                 galleryLightboxVideo.pause();
                 galleryLightboxVideo.removeAttribute('src');
                 galleryLightboxVideo.load();
                 galleryLightboxVideo.classList.add('is-off');
+                galleryLightboxFrame.removeAttribute('src');
+                galleryLightboxFrame.classList.add('is-off');
                 galleryLightboxImg.classList.remove('is-off');
                 galleryLightboxImg.src = src;
             }

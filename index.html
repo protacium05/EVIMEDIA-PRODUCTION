@@ -7,6 +7,7 @@
     <link rel="preconnect" href="[fonts.googleapis.com](https://fonts.googleapis.com)">
     <link rel="preconnect" href="[fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
     <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap)" rel="stylesheet">
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <style>
         /* ============================================
            CSS VARIABLES & RESET
@@ -742,6 +743,192 @@
             border-radius: 50%;
         }
 
+        .package-offer-card .service-features li::before {
+            flex-shrink: 0;
+            margin-top: 0.45em;
+        }
+
+        .services-packages {
+            margin-top: 88px;
+        }
+
+        .packages-header {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .package-offer-card {
+            background: var(--dark-surface);
+            border: 1px solid var(--dark-border);
+            border-radius: 20px;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-smooth);
+        }
+
+        .package-offer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-pink);
+            transform: scaleX(0);
+            transition: transform var(--transition-smooth);
+        }
+
+        .package-offer-card:hover {
+            border-color: var(--pink-dark);
+            box-shadow: 0 16px 36px rgba(233, 30, 140, 0.12);
+        }
+
+        .package-offer-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .package-offer-card .package-tier {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--pink-primary);
+            margin-bottom: 10px;
+        }
+
+        .package-offer-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.25;
+        }
+
+        .package-offer-card .package-tagline {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .package-offer-card .service-features li {
+            align-items: flex-start;
+            line-height: 1.45;
+        }
+
+        .package-offer-card .package-footnote {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--dark-border);
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .packages-category-block {
+            margin-top: 80px;
+            padding-top: 64px;
+            border-top: 1px solid var(--dark-border);
+        }
+
+        .packages-category-block:first-of-type {
+            margin-top: 88px;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .packages-category-header {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 40px;
+        }
+
+        .packages-category-header .section-title {
+            margin-top: 8px;
+        }
+
+        .packages-hero-sub {
+            margin-top: 12px;
+        }
+
+        .packages-grid--three {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .packages-grid--duo {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .packages-grid-stacked {
+            margin-top: 24px;
+        }
+
+        .packages-split {
+            display: grid;
+            grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .package-offer-card--addon {
+            background: var(--dark-bg);
+            border-style: dashed;
+            align-self: start;
+        }
+
+        .package-offer-card--addon h3 {
+            font-size: 1.2rem;
+        }
+
+        .package-scope {
+            display: inline-block;
+            margin-bottom: 14px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--pink-primary);
+            background: rgba(233, 30, 140, 0.1);
+            border: 1px solid rgba(233, 30, 140, 0.25);
+        }
+
+        .package-inclusions-2col {
+            margin-top: 4px;
+        }
+
+        @media (min-width: 768px) {
+            .package-inclusions-2col .service-features {
+                columns: 2;
+                column-gap: 2rem;
+            }
+
+            .package-inclusions-2col .service-features li {
+                break-inside: avoid;
+            }
+        }
+
+        .package-offer-card .package-section-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin: 20px 0 10px;
+        }
+
+        .package-offer-card .package-section-label:first-of-type {
+            margin-top: 0;
+        }
+
         /* ============================================
            PORTFOLIO SECTION
         ============================================ */
@@ -752,25 +939,40 @@
         .portfolio-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
+            align-items: flex-start;
             margin-bottom: 48px;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .portfolio-header .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .portfolio-header .portfolio-intro {
+            margin-top: 12px;
+            max-width: 520px;
         }
 
         .portfolio-filters {
             display: flex;
             gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
 
         .filter-btn {
-            padding: 10px 20px;
+            padding: 10px 18px;
             background: transparent;
             border: 1px solid var(--dark-border);
             border-radius: 50px;
             color: var(--text-secondary);
-            font-size: 0.875rem;
+            font-size: 0.8125rem;
             font-weight: 500;
             cursor: pointer;
             transition: all var(--transition-fast);
+            white-space: nowrap;
         }
 
         .filter-btn:hover,
@@ -780,98 +982,213 @@
             color: white;
         }
 
-        .portfolio-grid {
+        .portfolio-grid.portfolio-gallery {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: 56px;
+            gap: 14px;
+            grid-auto-flow: dense;
         }
 
-        .portfolio-item {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            cursor: pointer;
-            aspect-ratio: 4/5;
+        button.portfolio-item {
+            appearance: none;
+            margin: 0;
+            padding: 0;
+            border: none;
+            font: inherit;
+            color: inherit;
             background: var(--dark-card);
+            text-align: left;
         }
 
-        .portfolio-item:nth-child(1) {
-            grid-row: span 2;
+        .portfolio-gallery .portfolio-item {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            cursor: zoom-in;
+            border: 1px solid var(--dark-border);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+            min-height: 0;
         }
 
-        .portfolio-item:nth-child(4) {
-            grid-column: span 2;
-            aspect-ratio: 2/1;
+        .portfolio-gallery .portfolio-item:focus-visible {
+            outline: 2px solid var(--pink-primary);
+            outline-offset: 3px;
         }
 
-        .portfolio-thumb {
+        /* Portrait vs landscape footprint in the grid */
+        .portfolio-gallery .gallery-tile--portrait {
+            grid-column: span 3;
+            grid-row: span 4;
+        }
+
+        .portfolio-gallery .gallery-tile--landscape {
+            grid-column: span 6;
+            grid-row: span 3;
+        }
+
+        .portfolio-gallery .gallery-tile--video {
+            grid-column: span 6;
+            grid-row: span 3;
+        }
+
+        .portfolio-item .gallery-thumb {
             width: 100%;
             height: 100%;
-            background: var(--gradient-pink);
-            background-size: cover;
-            background-position: center;
-            opacity: 0.6;
-            transition: all var(--transition-smooth);
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform var(--transition-smooth);
         }
 
-        .portfolio-overlay {
+        .portfolio-item .gallery-preview-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            pointer-events: none;
+            transition: transform var(--transition-smooth);
+        }
+
+        .portfolio-item::after {
+            content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 24px;
-            opacity: 0;
-            transition: opacity var(--transition-smooth);
+            background: rgba(0, 0, 0, 0);
+            transition: background var(--transition-fast);
+            pointer-events: none;
         }
 
-        .portfolio-item:hover .portfolio-overlay {
-            opacity: 1;
+        .portfolio-item:hover .gallery-thumb,
+        .portfolio-item:hover .gallery-preview-video {
+            transform: scale(1.04);
         }
 
-        .portfolio-item:hover .portfolio-thumb {
-            opacity: 1;
-            transform: scale(1.05);
+        .portfolio-item:hover::after {
+            background: rgba(0, 0, 0, 0.12);
         }
 
-        .portfolio-overlay h4 {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 4px;
+        .portfolio-item[data-gallery-type="video"] {
+            cursor: pointer;
         }
 
-        .portfolio-overlay p {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-
-        .portfolio-overlay .view-btn {
+        .portfolio-item[data-gallery-type="video"]::before {
+            content: '';
             position: absolute;
-            top: 24px;
-            right: 24px;
-            width: 48px;
-            height: 48px;
-            background: var(--pink-primary);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
+            background: rgba(0, 0, 0, 0.55);
+            border: 2px solid rgba(255, 255, 255, 0.85);
+            z-index: 1;
+            pointer-events: none;
+            transition: transform var(--transition-fast), background var(--transition-fast);
+        }
+
+        .portfolio-item[data-gallery-type="video"] .gallery-play-icon {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-42%, -50%);
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 16px;
+            border-color: transparent transparent transparent rgba(255, 255, 255, 0.95);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .portfolio-item[data-gallery-type="video"]:hover::before {
+            background: var(--pink-primary);
+            transform: translate(-50%, -50%) scale(1.06);
+        }
+
+        /* Lightbox */
+        .gallery-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            display: grid;
+            place-items: center;
+            padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+        }
+
+        .gallery-lightbox[hidden] {
+            display: none !important;
+        }
+
+        .gallery-lightbox-backdrop {
+            position: absolute;
+            inset: 0;
+            border: none;
+            padding: 0;
+            margin: 0;
+            background: rgba(5, 5, 8, 0.94);
+            cursor: zoom-out;
+        }
+
+        .gallery-lightbox-inner {
+            position: relative;
+            z-index: 1;
+            max-width: min(96vw, 1400px);
+            max-height: min(92vh, 900px);
             display: flex;
             align-items: center;
             justify-content: center;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all var(--transition-bounce);
         }
 
-        .portfolio-item:hover .view-btn {
-            transform: translateY(0);
-            opacity: 1;
+        .gallery-lightbox-inner img,
+        .gallery-lightbox-inner video {
+            max-width: 100%;
+            max-height: min(92vh, 900px);
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
         }
 
-        .view-btn svg {
-            width: 20px;
-            height: 20px;
-            stroke: white;
+        .gallery-lightbox-inner .gallery-lightbox-img.is-off,
+        .gallery-lightbox-inner .gallery-lightbox-video.is-off {
+            display: none;
+        }
+
+        .gallery-lightbox-close {
+            position: fixed;
+            top: max(16px, env(safe-area-inset-top));
+            right: max(16px, env(safe-area-inset-right));
+            z-index: 2;
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            font-size: 1.5rem;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition-fast);
+        }
+
+        .gallery-lightbox-close:hover {
+            background: var(--pink-primary);
+        }
+
+        body.light-theme .gallery-lightbox-backdrop {
+            background: rgba(248, 249, 252, 0.94);
+        }
+
+        body.light-theme .gallery-lightbox-close {
+            background: rgba(0, 0, 0, 0.08);
+            color: var(--text-primary);
         }
 
         /* ============================================
@@ -1171,11 +1488,13 @@
             color: var(--text-primary);
         }
 
-        .calendly-wrapper .calendly-inline-widget {
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--dark-border);
-            background: var(--dark-card);
+        .calendly-wrapper .booking-badge-fallback {
+            margin-top: 8px;
+        }
+
+        .calendly-wrapper .booking-badge-fallback .btn {
+            width: 100%;
+            justify-content: center;
         }
 
         .form-submit {
@@ -1320,17 +1639,28 @@
                 grid-template-columns: 1fr 1fr;
             }
 
-            .portfolio-grid {
-                grid-template-columns: 1fr 1fr;
+            .packages-grid--three {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
-            .portfolio-item:nth-child(1) {
-                grid-row: auto;
+            .packages-split {
+                grid-template-columns: 1fr;
             }
 
-            .portfolio-item:nth-child(4) {
-                grid-column: auto;
-                aspect-ratio: 4/5;
+            .portfolio-grid.portfolio-gallery {
+                grid-template-columns: repeat(6, 1fr);
+                grid-auto-rows: 52px;
+            }
+
+            .portfolio-gallery .gallery-tile--portrait {
+                grid-column: span 3;
+                grid-row: span 4;
+            }
+
+            .portfolio-gallery .gallery-tile--landscape,
+            .portfolio-gallery .gallery-tile--video {
+                grid-column: span 6;
+                grid-row: span 3;
             }
 
             .contact-grid {
@@ -1408,6 +1738,16 @@
                 grid-template-columns: 1fr;
             }
 
+            .packages-grid--three,
+            .packages-grid--duo {
+                grid-template-columns: 1fr;
+            }
+
+            .packages-category-block {
+                margin-top: 56px;
+                padding-top: 48px;
+            }
+
             .portfolio-header {
                 flex-direction: column;
                 align-items: flex-start;
@@ -1418,8 +1758,21 @@
                 flex-wrap: wrap;
             }
 
-            .portfolio-grid {
-                grid-template-columns: 1fr;
+            .portfolio-grid.portfolio-gallery {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 140px;
+                gap: 10px;
+            }
+
+            .portfolio-gallery .gallery-tile--portrait {
+                grid-column: span 1;
+                grid-row: span 2;
+            }
+
+            .portfolio-gallery .gallery-tile--landscape,
+            .portfolio-gallery .gallery-tile--video {
+                grid-column: 1 / -1;
+                grid-row: span 2;
             }
 
             .form-row {
@@ -1700,14 +2053,245 @@
                             <polyline points="21 15 16 10 5 21"/>
                         </svg>
                     </div>
-                    <h3>Content Creation</h3>
-                    <p>Social media content and digital assets designed to boost engagement and visibility.</p>
+                    <h3>Social &amp; content</h3>
+                    <p>Social media management packages, motion content, and campaign-ready digital assets.</p>
                     <ul class="service-features">
-                        <li>Social Media Content</li>
-                        <li>Motion Graphics</li>
-                        <li>Brand Guidelines</li>
-                        <li>Digital Campaigns</li>
+                        <li>Social media manager packages (Evi Spotlight, Fame, Star)</li>
+                        <li>Daily posting &amp; SEO captions</li>
+                        <li>Motion graphics &amp; highlights</li>
+                        <li>Campaign &amp; brand rollouts</li>
                     </ul>
+                </div>
+            </div>
+
+            <div class="services-packages">
+                <div class="packages-category-block">
+                    <div class="packages-category-header reveal">
+                        <span class="section-label">Social media manager · Packages</span>
+                        <h2 class="section-title">Discover our tailored content production packages</h2>
+                        <p class="section-subtitle packages-hero-sub">
+                            Crafted to meet your unique goals—each Evi Media package is designed with your specific growth and production needs in mind.
+                        </p>
+                    </div>
+                    <div class="packages-grid packages-grid--three">
+                        <div class="package-offer-card reveal">
+                            <p class="package-tier">Package 1</p>
+                            <h3>Evi Spotlight</h3>
+                            <p class="package-tagline">Essential studio day + daily-ready social assets.</p>
+                            <ul class="service-features">
+                                <li>6 hours use of studio room</li>
+                                <li>15 video highlights</li>
+                                <li>15 inspirational post banners</li>
+                                <li>15 quotation posters</li>
+                                <li>SEO captioning</li>
+                                <li>Multi-platform posting (daily posting)</li>
+                                <li>Full production</li>
+                                <li>Edited and raw files</li>
+                            </ul>
+                        </div>
+                        <div class="package-offer-card reveal">
+                            <p class="package-tier">Package 2</p>
+                            <h3>Evi Fame</h3>
+                            <p class="package-tagline">More studio time and double the monthly deliverables.</p>
+                            <ul class="service-features">
+                                <li>10 hours use of studio room</li>
+                                <li>30 video highlights</li>
+                                <li>30 inspirational post banners</li>
+                                <li>30 quotation posters</li>
+                                <li>SEO captioning</li>
+                                <li>Multi-platform posting (daily posting)</li>
+                                <li>Full production</li>
+                                <li>Edited and raw files</li>
+                            </ul>
+                        </div>
+                        <div class="package-offer-card reveal">
+                            <p class="package-tier">Package 3</p>
+                            <h3>Evi Star</h3>
+                            <p class="package-tagline">Maximum coverage: events, lifestyle, and product/service creative.</p>
+                            <ul class="service-features">
+                                <li>15 hours use of studio room</li>
+                                <li>30 video highlights</li>
+                                <li>10 video events / lifestyle pieces</li>
+                                <li>30 inspirational post banners</li>
+                                <li>30 quotation posters</li>
+                                <li>30 product or service creatives</li>
+                                <li>SEO captioning</li>
+                                <li>Multi-platform posting (daily posting)</li>
+                                <li>Full production</li>
+                                <li>Edited and raw files</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="packages-category-block">
+                    <div class="packages-category-header reveal">
+                        <span class="section-label">Podcast shoot</span>
+                        <h2 class="section-title">Podcast setup &amp; add-ons</h2>
+                        <p class="section-subtitle packages-hero-sub">
+                            End-to-end podcast capture with branding, social extensions, and optional episode add-ons.
+                        </p>
+                    </div>
+                    <div class="packages-split">
+                        <div class="package-offer-card reveal package-inclusions-2col">
+                            <p class="package-tier">Podcast · Setup</p>
+                            <h3>Podcast setup package</h3>
+                            <p class="package-tagline">One intensive shoot day engineered to power about a month of content.</p>
+                            <p class="package-section-label">Deliverables</p>
+                            <ul class="service-features">
+                                <li>1-day shoot = 1 month of content (structured plan)</li>
+                                <li>2 full episodes</li>
+                                <li>2 trailers / previews</li>
+                                <li>30 video highlights (15 for episode 1, 15 for episode 2)</li>
+                                <li>30 banner highlights</li>
+                                <li>2 feedback videos</li>
+                                <li>2 video teasers</li>
+                                <li>2 banners per episode</li>
+                                <li>Unlimited BTS stills</li>
+                                <li>Photoshoot per episode—full podcast structure including prepared scripts</li>
+                                <li>Complete podcast branding</li>
+                                <li>Social media management—posting &amp; scheduling (Facebook, Instagram, TikTok, YouTube, Spotify)</li>
+                            </ul>
+                            <p class="package-section-label">Studio, crew &amp; gear</p>
+                            <ul class="service-features">
+                                <li>Studio included: professional cameras, mics, lights, director &amp; editor</li>
+                                <li>1 director &amp; scriptwriter for documentation</li>
+                                <li>1 assistant director &amp; technical lead</li>
+                                <li>2-person media team</li>
+                                <li>Guest needs, host needs, and BTS coverage</li>
+                                <li>1 clapper &amp; timer</li>
+                            </ul>
+                            <p class="package-footnote">Not included for outside-location shoots: transportation and meals for the production team.</p>
+                        </div>
+                        <div class="package-offer-card reveal package-offer-card--addon">
+                            <p class="package-tier">Add-on</p>
+                            <h3>Additional episode edits</h3>
+                            <p class="package-tagline">Expand your series with a matched deliverable set.</p>
+                            <ul class="service-features">
+                                <li>1 episode</li>
+                                <li>15 video highlights</li>
+                                <li>15 banner highlights</li>
+                                <li>1 feedback video</li>
+                                <li>1 video teaser</li>
+                                <li>1 episode banner</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="packages-category-block">
+                    <div class="packages-category-header reveal">
+                        <span class="section-label">Campaign &amp; commercial</span>
+                        <h2 class="section-title">Campaign photoshoot &amp; video commercial</h2>
+                        <p class="section-subtitle packages-hero-sub">
+                            Studio-led stills and motion, available standalone or as a combined production day.
+                        </p>
+                    </div>
+                    <div class="packages-grid packages-grid--duo">
+                        <div class="package-offer-card reveal">
+                            <p class="package-tier">Campaign · Photoshoot</p>
+                            <h3>Campaign photoshoot</h3>
+                            <p class="package-tagline">Layouts, direction, and polished stills for launches and lookbooks.</p>
+                            <ul class="service-features">
+                                <li>3 campaign layouts</li>
+                                <li>Unlimited shots</li>
+                                <li>Edited photos</li>
+                                <li>8 hours use of studio</li>
+                                <li>Director, assistant director, client &amp; model coordination</li>
+                            </ul>
+                        </div>
+                        <div class="package-offer-card reveal">
+                            <p class="package-tier">Video · Commercial</p>
+                            <h3>Video commercial</h3>
+                            <p class="package-tagline">Focused commercial block with full post support.</p>
+                            <ul class="service-features">
+                                <li>Edited video shoot</li>
+                                <li>4 hours use of studio</li>
+                                <li>Director, assistant director, client &amp; model coordination</li>
+                                <li>Video raw files and B-rolls</li>
+                                <li>BTS support</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="packages-grid packages-grid-stacked">
+                        <div class="package-offer-card reveal">
+                            <p class="package-tier">Bundle</p>
+                            <h3>Campaign photoshoot &amp; video commercial package</h3>
+                            <p class="package-tagline">Single coordinated day for hero stills and hero film.</p>
+                            <ul class="service-features">
+                                <li>3 campaign layouts</li>
+                                <li>Unlimited shots</li>
+                                <li>Edited photos</li>
+                                <li>Edited video commercial</li>
+                                <li>8 hours use of studio</li>
+                                <li>Director, assistant director, client &amp; model coordination</li>
+                                <li>Video raw files and B-rolls</li>
+                                <li>BTS support</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="packages-category-block">
+                    <div class="packages-category-header reveal">
+                        <span class="section-label">Events package</span>
+                        <h2 class="section-title">Weddings, birthdays, corporate &amp; celebrations</h2>
+                        <p class="section-subtitle packages-hero-sub">
+                            Choose the coverage depth that matches your milestone—photo, film, albums, and same-day storytelling.
+                        </p>
+                    </div>
+                    <div class="packages-grid packages-grid--three">
+                        <div class="package-offer-card reveal">
+                            <p class="package-tier">Classic · Moments</p>
+                            <h3>Classic moments package</h3>
+                            <span class="package-scope">Wedding · Birthday · Company · Other events</span>
+                            <ul class="service-features">
+                                <li>1 photographer</li>
+                                <li>1 videographer</li>
+                                <li>On-the-day coverage, unlimited shots</li>
+                                <li>Soft copy (500–600 edited photos)</li>
+                                <li>Video highlights and raw files</li>
+                            </ul>
+                        </div>
+                        <div class="package-offer-card reveal">
+                            <p class="package-tier">Grand · Experience</p>
+                            <h3>Grand experience package</h3>
+                            <span class="package-scope">Wedding · Birthday · Company · Other events</span>
+                            <ul class="service-features">
+                                <li>2 photographers, 2 videographers</li>
+                                <li>2 production assistants, 1 on-site editor</li>
+                                <li>On-the-day coverage</li>
+                                <li>40-page leather album</li>
+                                <li>11×14 portrait with frame</li>
+                                <li>8×10 family portrait | group photo with frame</li>
+                                <li>Soft copy (500–600 edited photos)</li>
+                                <li>Unlimited shots, same-day edit</li>
+                                <li>Video highlights (6–8 min duration)</li>
+                                <li>Raw files</li>
+                            </ul>
+                            <p class="package-footnote">No same-day edit (SDE): less ₱8,000</p>
+                        </div>
+                        <div class="package-offer-card reveal">
+                            <p class="package-tier">Prestige · Elite</p>
+                            <h3>Prestige elite package</h3>
+                            <span class="package-scope">Wedding · Birthday · Company · Other events</span>
+                            <ul class="service-features">
+                                <li>2 photographers, 2 videographers</li>
+                                <li>2 production assistants, 1 on-site editor</li>
+                                <li>Pre-event photo session</li>
+                                <li>Save-the-date video (2–3 minutes)</li>
+                                <li>On-the-day coverage</li>
+                                <li>40-page leather album</li>
+                                <li>12×16 portrait with frame</li>
+                                <li>8×10 family portrait | group photo with frame</li>
+                                <li>Soft copy (500–600 edited photos)</li>
+                                <li>Unlimited shots, same-day edit</li>
+                                <li>Video highlights (6–8 min duration)</li>
+                                <li>Raw files</li>
+                            </ul>
+                            <p class="package-footnote">No same-day edit (SDE): less ₱8,000</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1719,103 +2303,68 @@
             <div class="portfolio-header reveal">
                 <div>
                     <span class="section-label">Our Work</span>
-                    <h2 class="section-title">Featured Projects</h2>
+                    <h2 class="section-title">Portfolio gallery</h2>
+                    <p class="section-subtitle portfolio-intro">
+                        Filter by category. Under Video commercial you’ll see every file from your assets/videos folder. Click a tile to open it full size (images) or play with controls (video).
+                    </p>
                 </div>
                 <div class="portfolio-filters">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="photo">Photography</button>
-                    <button class="filter-btn" data-filter="video">Video</button>
-                    <button class="filter-btn" data-filter="content">Content</button>
+                    <button type="button" class="filter-btn active" data-filter="all">All</button>
+                    <button type="button" class="filter-btn" data-filter="digital">Digital &amp; graphics</button>
+                    <button type="button" class="filter-btn" data-filter="podcast">Podcast shoot</button>
+                    <button type="button" class="filter-btn" data-filter="campaign">Campaign shoot</button>
+                    <button type="button" class="filter-btn" data-filter="commercial">Video commercial</button>
                 </div>
             </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-item reveal" data-category="photo">
-                    <div class="portfolio-thumb" style="background-image: url('assets/photo-1.png');"></div>
-                    <div class="portfolio-overlay">
-                        <span class="view-btn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                                <polyline points="15 3 21 3 21 9"/>
-                                <line x1="10" y1="14" x2="21" y2="3"/>
-                            </svg>
-                        </span>
-                        <h4>Luxe Fashion Campaign</h4>
-                        <p>Editorial Photography</p>
-                    </div>
-                </div>
-                <div class="portfolio-item reveal" data-category="video">
-                    <div class="portfolio-thumb"></div>
-                    <div class="portfolio-overlay">
-                        <span class="view-btn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                                <polyline points="15 3 21 3 21 9"/>
-                                <line x1="10" y1="14" x2="21" y2="3"/>
-                            </svg>
-                        </span>
-                        <h4>Aura Skincare</h4>
-                        <p>Brand Commercial</p>
-                    </div>
-                </div>
-                <div class="portfolio-item reveal" data-category="photo">
-                    <div class="portfolio-thumb" style="background-image: url('assets/photo-3.png');"></div>
-                    <div class="portfolio-overlay">
-                        <span class="view-btn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                                <polyline points="15 3 21 3 21 9"/>
-                                <line x1="10" y1="14" x2="21" y2="3"/>
-                            </svg>
-                        </span>
-                        <h4>Portrait Glow Session</h4>
-                        <p>Beauty Photography</p>
-                    </div>
-                </div>
-                <div class="portfolio-item reveal" data-category="photo">
-                    <div class="portfolio-thumb" style="background-image: url('assets/photo-2.png');"></div>
-                    <div class="portfolio-overlay">
-                        <span class="view-btn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                                <polyline points="15 3 21 3 21 9"/>
-                                <line x1="10" y1="14" x2="21" y2="3"/>
-                            </svg>
-                        </span>
-                        <h4>Horizon Tech Launch</h4>
-                        <p>Product Photography</p>
-                    </div>
-                </div>
-                <div class="portfolio-item reveal" data-category="video">
-                    <div class="portfolio-thumb"></div>
-                    <div class="portfolio-overlay">
-                        <span class="view-btn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                                <polyline points="15 3 21 3 21 9"/>
-                                <line x1="10" y1="14" x2="21" y2="3"/>
-                            </svg>
-                        </span>
-                        <h4>Velocity Motors</h4>
-                        <p>Automotive Commercial</p>
-                    </div>
-                </div>
-                <div class="portfolio-item reveal" data-category="content">
-                    <div class="portfolio-thumb"></div>
-                    <div class="portfolio-overlay">
-                        <span class="view-btn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                                <polyline points="15 3 21 3 21 9"/>
-                                <line x1="10" y1="14" x2="21" y2="3"/>
-                            </svg>
-                        </span>
-                        <h4>Bloom Wellness</h4>
-                        <p>Brand Identity</p>
-                    </div>
-                </div>
+            <div class="portfolio-grid portfolio-gallery">
+                <button type="button" class="portfolio-item reveal gallery-tile--portrait" data-category="digital" data-gallery-type="image" data-gallery-src="assets/photo-1.png" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/photo-1.png" alt="" loading="lazy" width="900" height="1200">
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--landscape" data-category="digital" data-gallery-type="image" data-gallery-src="assets/photo-2.png" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/photo-2.png" alt="" loading="lazy" width="1200" height="800">
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--portrait" data-category="podcast" data-gallery-type="image" data-gallery-src="assets/photo-3.png" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/photo-3.png" alt="" loading="lazy" width="900" height="1200">
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--landscape" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/photo-1.png" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/photo-1.png" alt="" loading="lazy" width="1200" height="800">
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--portrait" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/photo-2.png" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/photo-2.png" alt="" loading="lazy" width="900" height="1200">
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--landscape" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/photo-3.png" aria-label="View image">
+                    <img class="gallery-thumb" src="assets/photo-3.png" alt="" loading="lazy" width="1200" height="800">
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--video" data-category="commercial" data-gallery-type="video" data-gallery-src="assets/videos/2-CONFESSION-DRAFT2.mp4" aria-label="Play video">
+                    <span class="gallery-play-icon" aria-hidden="true"></span>
+                    <video class="gallery-preview-video" muted playsinline loop preload="metadata">
+                        <source src="assets/videos/2-CONFESSION-DRAFT2.mp4" type="video/mp4">
+                    </video>
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--video" data-category="commercial" data-gallery-type="video" data-gallery-src="assets/videos/6-CONFESSION-DRAFT2.mp4" aria-label="Play video">
+                    <span class="gallery-play-icon" aria-hidden="true"></span>
+                    <video class="gallery-preview-video" muted playsinline loop preload="metadata">
+                        <source src="assets/videos/6-CONFESSION-DRAFT2.mp4" type="video/mp4">
+                    </video>
+                </button>
+                <button type="button" class="portfolio-item reveal gallery-tile--video" data-category="commercial" data-gallery-type="video" data-gallery-src="assets/videos/6-EMPLOYEE-DRAFT2.mp4" aria-label="Play video">
+                    <span class="gallery-play-icon" aria-hidden="true"></span>
+                    <video class="gallery-preview-video" muted playsinline loop preload="metadata">
+                        <source src="assets/videos/6-EMPLOYEE-DRAFT2.mp4" type="video/mp4">
+                    </video>
+                </button>
             </div>
         </div>
     </section>
+
+    <div id="galleryLightbox" class="gallery-lightbox" hidden role="dialog" aria-modal="true" aria-label="Media viewer">
+        <button type="button" class="gallery-lightbox-backdrop" tabindex="-1" aria-label="Close viewer"></button>
+        <button type="button" class="gallery-lightbox-close" aria-label="Close">&times;</button>
+        <div class="gallery-lightbox-inner">
+            <img id="galleryLightboxImg" class="gallery-lightbox-img is-off" src="" alt="">
+            <video id="galleryLightboxVideo" class="gallery-lightbox-video is-off" controls playsinline></video>
+        </div>
+    </div>
 
     <!-- Contact Section -->
     <section class="contact section" id="contact">
@@ -1837,7 +2386,7 @@
                             </div>
                             <div class="contact-method-text">
                                 <span>Email</span>
-                                <p>hello@evimedia.com</p>
+                                <p>marketingharley05@gmail.com</p>
                             </div>
                         </div>
                         <div class="contact-method">
@@ -1848,7 +2397,7 @@
                             </div>
                             <div class="contact-method-text">
                                 <span>Phone</span>
-                                <p>+1 (555) 123-4567</p>
+                                <p>+63 0919-098-9162</p>
                             </div>
                         </div>
                         <div class="contact-method">
@@ -1860,7 +2409,7 @@
                             </div>
                             <div class="contact-method-text">
                                 <span>Location</span>
-                                <p>Los Angeles, California</p>
+                                <p>Blk4 Lot4 Ph2a Mahogany Villas,Looc Calamba City</p>
                             </div>
                         </div>
                     </div>
@@ -1889,11 +2438,10 @@
                 </div>
                 <div class="contact-form-wrapper reveal calendly-wrapper">
                     <h4 class="booking-panel-title">Book an appointment</h4>
-                    <p class="booking-panel-subtitle">Choose a date and time below. Scheduling is handled securely through Calendly.</p>
-                    <!-- Calendly inline widget begin -->
-                    <div class="calendly-inline-widget" data-url="https://calendly.com/protacioalmerjann/sched?text_color=030000&primary_color=fc00ff" style="min-width:320px;height:700px;"></div>
-                    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-                    <!-- Calendly inline widget end -->
+                    <p class="booking-panel-subtitle">Use the <strong>Schedule time with me</strong> button in the corner of the page to pick a date and time, or open scheduling below. Handled securely through Calendly.</p>
+                    <div class="booking-badge-fallback">
+                        <a href="https://calendly.com/protacioalmerjann/evimedia-appointment" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Open Calendly scheduling</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1945,6 +2493,21 @@
             </div>
         </div>
     </footer>
+
+    <!-- Calendly badge widget begin -->
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            Calendly.initBadgeWidget({
+                url: 'https://calendly.com/protacioalmerjann/evimedia-appointment',
+                text: 'Schedule time with me',
+                color: '#ae00b4',
+                textColor: '#ffffff',
+                branding: true
+            });
+        };
+    </script>
+    <!-- Calendly badge widget end -->
 
     <script>
         // ============================================
@@ -2055,20 +2618,78 @@
 
                 portfolioItems.forEach(item => {
                     if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                        item.style.display = 'block';
+                        item.style.display = '';
                         setTimeout(() => {
                             item.style.opacity = '1';
                             item.style.transform = 'scale(1)';
                         }, 10);
                     } else {
                         item.style.opacity = '0';
-                        item.style.transform = 'scale(0.8)';
+                        item.style.transform = 'scale(0.98)';
                         setTimeout(() => {
                             item.style.display = 'none';
                         }, 300);
                     }
                 });
             });
+        });
+
+        // ============================================
+        // PORTFOLIO LIGHTBOX (images & video)
+        // ============================================
+        const galleryLightbox = document.getElementById('galleryLightbox');
+        const galleryLightboxBackdrop = galleryLightbox?.querySelector('.gallery-lightbox-backdrop');
+        const galleryLightboxClose = galleryLightbox?.querySelector('.gallery-lightbox-close');
+        const galleryLightboxImg = document.getElementById('galleryLightboxImg');
+        const galleryLightboxVideo = document.getElementById('galleryLightboxVideo');
+
+        const closeGalleryLightbox = () => {
+            if (!galleryLightbox) return;
+            galleryLightbox.hidden = true;
+            galleryLightboxVideo.pause();
+            galleryLightboxVideo.removeAttribute('src');
+            galleryLightboxVideo.removeAttribute('poster');
+            galleryLightboxVideo.load();
+            galleryLightboxImg.removeAttribute('src');
+            galleryLightboxImg.classList.add('is-off');
+            galleryLightboxVideo.classList.add('is-off');
+            document.body.style.overflow = '';
+        };
+
+        const openGalleryLightbox = (type, src, poster) => {
+            if (!galleryLightbox || !src) return;
+            galleryLightbox.hidden = false;
+            document.body.style.overflow = 'hidden';
+            if (type === 'video') {
+                galleryLightboxImg.classList.add('is-off');
+                galleryLightboxVideo.classList.remove('is-off');
+                if (poster) galleryLightboxVideo.setAttribute('poster', poster);
+                else galleryLightboxVideo.removeAttribute('poster');
+                galleryLightboxVideo.src = src;
+                galleryLightboxVideo.play().catch(() => {});
+            } else {
+                galleryLightboxVideo.pause();
+                galleryLightboxVideo.removeAttribute('src');
+                galleryLightboxVideo.load();
+                galleryLightboxVideo.classList.add('is-off');
+                galleryLightboxImg.classList.remove('is-off');
+                galleryLightboxImg.src = src;
+            }
+        };
+
+        document.querySelectorAll('.portfolio-item[data-gallery-type]').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const t = btn.getAttribute('data-gallery-type');
+                const src = btn.getAttribute('data-gallery-src');
+                const poster = btn.getAttribute('data-gallery-poster');
+                openGalleryLightbox(t, src, poster);
+            });
+        });
+
+        galleryLightboxBackdrop?.addEventListener('click', closeGalleryLightbox);
+        galleryLightboxClose?.addEventListener('click', closeGalleryLightbox);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && galleryLightbox && !galleryLightbox.hidden) closeGalleryLightbox();
         });
 
         // ============================================

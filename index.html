@@ -1051,6 +1051,22 @@
             transition: transform var(--transition-smooth);
         }
 
+        .portfolio-item .gallery-video-thumb {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: opacity var(--transition-fast), transform var(--transition-smooth);
+            z-index: 0;
+        }
+
+        .portfolio-item.video-loaded .gallery-video-thumb {
+            opacity: 0;
+        }
+
         .portfolio-item::after {
             content: '';
             position: absolute;
@@ -1062,6 +1078,10 @@
 
         .portfolio-item:hover .gallery-thumb,
         .portfolio-item:hover .gallery-preview-video {
+            transform: scale(1.04);
+        }
+
+        .portfolio-item[data-gallery-type="video"]:hover .gallery-video-thumb {
             transform: scale(1.04);
         }
 
@@ -2335,22 +2355,25 @@
                 <button type="button" class="portfolio-item reveal gallery-tile--landscape" data-category="campaign" data-gallery-type="image" data-gallery-src="assets/photo-3.png" aria-label="View image">
                     <img class="gallery-thumb" src="assets/photo-3.png" alt="" loading="lazy" width="1200" height="800">
                 </button>
-                <button type="button" class="portfolio-item reveal gallery-tile--video" data-category="commercial" data-gallery-type="video" data-gallery-src="assets/videos/2-CONFESSION-DRAFT2.mp4" aria-label="Play video">
+                <button type="button" class="portfolio-item reveal gallery-tile--video" data-category="commercial" data-gallery-type="video" data-gallery-src="assets/videos/2-CONFESSION-DRAFT2.mp4" data-gallery-thumb="assets/photo-3.png" aria-label="Play video">
                     <span class="gallery-play-icon" aria-hidden="true"></span>
-                    <video class="gallery-preview-video" muted playsinline loop preload="metadata">
-                        <source src="assets/videos/2-CONFESSION-DRAFT2.mp4" type="video/mp4">
+                    <img class="gallery-video-thumb" src="assets/photo-3.png" alt="" loading="lazy">
+                    <video class="gallery-preview-video" muted playsinline loop preload="none">
+                        <source data-src="assets/videos/2-CONFESSION-DRAFT2.mp4" type="video/mp4">
                     </video>
                 </button>
-                <button type="button" class="portfolio-item reveal gallery-tile--video" data-category="commercial" data-gallery-type="video" data-gallery-src="assets/videos/6-CONFESSION-DRAFT2.mp4" aria-label="Play video">
+                <button type="button" class="portfolio-item reveal gallery-tile--video" data-category="commercial" data-gallery-type="video" data-gallery-src="assets/videos/6-CONFESSION-DRAFT2.mp4" data-gallery-thumb="assets/photo-1.png" aria-label="Play video">
                     <span class="gallery-play-icon" aria-hidden="true"></span>
-                    <video class="gallery-preview-video" muted playsinline loop preload="metadata">
-                        <source src="assets/videos/6-CONFESSION-DRAFT2.mp4" type="video/mp4">
+                    <img class="gallery-video-thumb" src="assets/photo-1.png" alt="" loading="lazy">
+                    <video class="gallery-preview-video" muted playsinline loop preload="none">
+                        <source data-src="assets/videos/6-CONFESSION-DRAFT2.mp4" type="video/mp4">
                     </video>
                 </button>
-                <button type="button" class="portfolio-item reveal gallery-tile--video" data-category="commercial" data-gallery-type="video" data-gallery-src="assets/videos/6-EMPLOYEE-DRAFT2.mp4" aria-label="Play video">
+                <button type="button" class="portfolio-item reveal gallery-tile--video" data-category="commercial" data-gallery-type="video" data-gallery-src="assets/videos/6-EMPLOYEE-DRAFT2.mp4" data-gallery-thumb="assets/photo-2.png" aria-label="Play video">
                     <span class="gallery-play-icon" aria-hidden="true"></span>
-                    <video class="gallery-preview-video" muted playsinline loop preload="metadata">
-                        <source src="assets/videos/6-EMPLOYEE-DRAFT2.mp4" type="video/mp4">
+                    <img class="gallery-video-thumb" src="assets/photo-2.png" alt="" loading="lazy">
+                    <video class="gallery-preview-video" muted playsinline loop preload="none">
+                        <source data-src="assets/videos/6-EMPLOYEE-DRAFT2.mp4" type="video/mp4">
                     </video>
                 </button>
             </div>
@@ -2643,6 +2666,33 @@
         const galleryLightboxImg = document.getElementById('galleryLightboxImg');
         const galleryLightboxVideo = document.getElementById('galleryLightboxVideo');
 
+        const hydratePreviewVideo = (btn) => {
+            if (!btn) return;
+            const previewVideo = btn.querySelector('.gallery-preview-video');
+            const sourceEl = previewVideo?.querySelector('source[data-src]');
+            if (!previewVideo || !sourceEl) return;
+            const src = sourceEl.getAttribute('data-src');
+            if (!src) return;
+            sourceEl.setAttribute('src', src);
+            sourceEl.removeAttribute('data-src');
+            previewVideo.load();
+            previewVideo.addEventListener('loadeddata', () => {
+                btn.classList.add('video-loaded');
+            }, { once: true });
+        };
+
+        const previewVideos = document.querySelectorAll('.portfolio-item[data-gallery-type="video"]');
+        const previewObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const btn = entry.target;
+                hydratePreviewVideo(btn);
+                previewObserver.unobserve(btn);
+            });
+        }, { rootMargin: '220px 0px' });
+
+        previewVideos.forEach((btn) => previewObserver.observe(btn));
+
         const closeGalleryLightbox = () => {
             if (!galleryLightbox) return;
             galleryLightbox.hidden = true;
@@ -2682,6 +2732,7 @@
                 const t = btn.getAttribute('data-gallery-type');
                 const src = btn.getAttribute('data-gallery-src');
                 const poster = btn.getAttribute('data-gallery-poster');
+                if (t === 'video') hydratePreviewVideo(btn);
                 openGalleryLightbox(t, src, poster);
             });
         });
